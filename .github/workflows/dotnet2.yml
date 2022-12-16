@@ -33,3 +33,7 @@ jobs:
         server: ftp.construlive.com.br
         username: construlive
         password: ${{ secrets.FTP_PASSWORD }}
+        localDir: "Release/"
+        remoteDir: "www/api/"
+        
+
