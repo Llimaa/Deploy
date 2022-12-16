@@ -17,7 +17,7 @@ jobs:
       with:
         dotnet-version: 6.0.x
         name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@3.1.1
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
         server: ${{ secrets.FTP_HOST }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
@@ -33,7 +33,7 @@ jobs:
       run: dotnet publish -c Release  --output ./Release
       
     - name: FTP Deploy
-      uses: SamKirkland/FTP-Deploy-Action@3.1.1
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
         # Deployment destination server & path. Formatted as protocol://domain.com:port/full/destination/path/
         server: ftp.construlive.com.br
@@ -43,4 +43,4 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         # The local folder to copy, defaults to root project folder
         server-dir: "/www/api/"
-        local-dir: "./Release/"
+        local-dir: "/home/runner/work/Deploy/Deploy/Release/"
