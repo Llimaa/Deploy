@@ -13,9 +13,9 @@ jobs:
       uses: actions/checkout@v3
       with:
         dotnet-version: 6.0.x
-        server: ${{ secrets.FTP_HOST }}
-        username: ${{ secrets.FTP_USUARIO }}
-        password: ${{ secrets.FTP_SENHA }}
+        host: ${{ secrets.FTP_HOST }}
+        user: ${{ secrets.FTP_PASSWORD }}
+        password: ${{ secrets.FTP_USERNAME }}
         remote_dir: "/www/api"
         local-dir: "./Release/"
 
@@ -24,7 +24,7 @@ jobs:
       uses: genietim/ftp-action@releases/v4
       with:
         host: ${{ secrets.FTP_HOST }}
-        user: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
+        user: ${{ secrets.FTP_PASSWORD }}
+        password: ${{ secrets.FTP_USERNAME }}
         localDir: "Release/"
         remoteDir: "www/api/"
