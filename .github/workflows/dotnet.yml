@@ -9,36 +9,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/checkout@v3
-      with:
-        dotnet-version: 6.0.x
-        name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@4.0.0
-        server: ${{ secrets.FTP_HOST }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        remote_dir: "/www/api/"
-        local-dir: "./Release/"
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
-    - name: Publish
-      run: dotnet publish -c Release  --output ./Release
-      
-    - name: FTP Deploy
-      uses: kevinpainchaud/simple-ftp-deploy-action@v1.2.1
-      with:
-        ftp_host: ftp.construlive.com.br
-        ftp_username: ${{ secrets.FTP_USERNAME }}
-        ftp_password: ${{ secrets.FTP_PASSWORD }}
-        local_source_dir: "./Release"
-        dist_target_dir: "/www/api"
-        delete: "true"
-        exclude: "'^logs/' '^README.md'"
+      - name: Deploy para hostel
+        uses: easingthemes/ssh-deploy@main
+        env:
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "Release/"
+          REMOTE_HOST: ${{ secrets.FTP_HOST }}
+          REMOTE_USER: ${{ secrets.FTP_USERNAME }}
+          REMOTE_PORT: 21
+          TARGET: ${{ secrets.FTP_PASSWORD }}
+
