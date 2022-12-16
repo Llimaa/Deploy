@@ -23,8 +23,8 @@ jobs:
         name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         server: ${{ secrets.FTP_HOST }}
-        username: ${{ secrets.FTP_USUARIO }}
-        password: ${{ secrets.FTP_SENHA }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
         remote_dir: "/www/api"
         local-dir: "./Release/"
     - name: Restore dependencies
