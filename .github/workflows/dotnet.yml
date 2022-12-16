@@ -1,20 +1,28 @@
 # This workflow will build a .NET project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-
 name: .NET
-
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/checkout@v3
+      with:
+        dotnet-version: 6.0.x
+        name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@3.1.1
+        server: ${{ secrets.FTP_HOST }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        remote_dir: "/www/api/"
+        local-dir: "./Release/"
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
@@ -25,7 +33,7 @@ jobs:
       run: dotnet publish -c Release  --output ./Release
       
     - name: FTP Deploy
-      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      uses: SamKirkland/FTP-Deploy-Action@3.1.1
       with:
         # Deployment destination server & path. Formatted as protocol://domain.com:port/full/destination/path/
         server: ftp.construlive.com.br
@@ -34,5 +42,5 @@ jobs:
         # FTP account password
         password: ${{ secrets.FTP_PASSWORD }}
         # The local folder to copy, defaults to root project folder
-        server-dir: "./Deploy/Controllers/"
+        server-dir: "/www/api/"
         local-dir: "./Release/"
