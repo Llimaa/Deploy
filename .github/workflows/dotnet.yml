@@ -15,18 +15,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/checkout@v3
-      with:
-        dotnet-version: 6.0.x
-        name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@4.0.0
-        server: ${{ secrets.FTP_HOST }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        remote_dir: "/www/api"
-        local-dir: "./Release/"
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
@@ -46,5 +34,5 @@ jobs:
         # FTP account password
         password: ${{ secrets.FTP_PASSWORD }}
         # The local folder to copy, defaults to root project folder
-        server-dir: "/"
+        server-dir: "./Deploy/Controllers/"
         local-dir: "./Release/"
