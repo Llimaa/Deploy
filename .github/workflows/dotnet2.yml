@@ -32,7 +32,7 @@ jobs:
       with:
         server: ftp.construlive.com.br
         username: construlive
-        password: live123
+        password:  ${{ secrets.FTP_PASSWORD }}
         port: 21
         protocol: ftp
         local-dir: "Release/"
