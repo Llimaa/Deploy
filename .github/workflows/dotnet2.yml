@@ -24,15 +24,15 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+    - name: Publish
+      run: dotnet publish -c Release  --output ./Release
       
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
         server: ftp.construlive.com.br
         username: construlive
-        password: ${{ secrets.FTP_PASSWORD }}
+        password: live123
         localDir: "Release/"
         remoteDir: "www/api/"
         
