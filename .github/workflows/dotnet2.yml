@@ -33,7 +33,9 @@ jobs:
         server: ftp.construlive.com.br
         username: construlive
         password: live123
-        localDir: "Release/"
-        remoteDir: "www/api/"
+        port: 21
+        protocol: ftp
+        local-dir: "Release/"
+        server-dir: "www/api/"
         
 
